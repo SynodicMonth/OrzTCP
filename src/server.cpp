@@ -105,7 +105,7 @@ bool RDTServer::udpSendPacket(const OrzTCPPacket* packet, const sockaddr_in& to)
     } else {
         std::cout << "DAT";
     }
-    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtAck);
+    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtSeqAck);
     // std::cout << " SEQ:" << packet->header.seq << " ACK:" << packet->header.ack;
     std::cout << " CKSUM:" << int(packet->header.checksum) << std::endl;
     return true;
@@ -155,7 +155,7 @@ bool RDTServer::udpRecvPacket(OrzTCPPacket*& packet, const sockaddr_in& from) {
     } else {
         std::cout << "DAT";
     }
-    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtAck);
+    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtSeqAck);
     // std::cout << " SEQ:" << packet->header.seq << " ACK:" << packet->header.ack;
     std::cout << " CKSUM:" << int(packet->header.checksum) << std::endl;
 
@@ -180,8 +180,8 @@ bool RDTServer::rdtRecv(char* buf, int& len, const sockaddr_in& from) {
         }
 
         // check if recieved correct packet
-        if (packet->header.rdtAck == rdtSeq && checkSum(&packet->header) && packet->header.type != TYPE_FIN) {
-            // std::cout << "[INFO ] Received packet SEQ" << int(packet->header.rdtAck) << std::endl;
+        if (packet->header.rdtSeqAck == rdtSeq && checkSum(&packet->header) && packet->header.type != TYPE_FIN) {
+            // std::cout << "[INFO ] Received packet SEQ" << int(packet->header.rdtSeqAck) << std::endl;
             // extract data
             len = packet->header.len;
             memcpy(buf, packet->payload, len);

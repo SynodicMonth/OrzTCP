@@ -29,7 +29,7 @@
 
 typedef struct {
     uint8_t type;
-    uint8_t rdtAck;
+    uint8_t rdtSeqAck;
     uint8_t reserved[2];
     uint32_t seq;
     uint32_t ack;
@@ -48,12 +48,12 @@ const uint8_t TYPE_FIN = 1 << 5;
 const uint8_t TYPE_DATA = 0;
 
 // encode header
-void OrzTCPHeaderEncode(OrzTCPHeader *header, uint8_t type, uint32_t seq, uint32_t ack, uint16_t len, uint8_t rdtAck) {
+void OrzTCPHeaderEncode(OrzTCPHeader *header, uint8_t type, uint32_t seq, uint32_t ack, uint16_t len, uint8_t rdtSeqAck) {
     header->type = type;
     header->seq = seq;
     header->ack = ack;
     header->len = len;
-    header->rdtAck = rdtAck;
+    header->rdtSeqAck = rdtSeqAck;
     header->checksum = 0;
 }
 

@@ -26,7 +26,7 @@ private:
     SOCKET clientSocket;
     struct sockaddr_in clientAddr;
     WSADATA wsa;
-    int rdtAck = 0;
+    int rdtSeqAck = 0;
     int seq = 0;
 
     bool rdtSend(const char* buffer, int len, const sockaddr_in& to);
@@ -107,7 +107,7 @@ bool RDTClient::udpSendPacket(const OrzTCPPacket* packet, const sockaddr_in& to)
     } else {
         std::cout << "DAT";
     }
-    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtAck);
+    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtSeqAck);
     // std::cout << " SEQ:" << packet->header.seq << " ACK:" << packet->header.ack;
     std::cout << " CKSUM:" << int(packet->header.checksum) << std::endl;
     return true;
@@ -159,7 +159,7 @@ bool RDTClient::udpRecvPacket(OrzTCPPacket*& packet, const sockaddr_in& from) {
     } else {
         std::cout << "DAT";
     }
-    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtAck);
+    std::cout << " RDTSEQ/ACK:" << int(packet->header.rdtSeqAck);
     // std::cout << " SEQ:" << packet->header.seq << " ACK:" << packet->header.ack;
     std::cout << " CKSUM:" << int(packet->header.checksum) << std::endl;
 
@@ -169,12 +169,11 @@ bool RDTClient::udpRecvPacket(OrzTCPPacket*& packet, const sockaddr_in& from) {
 bool RDTClient::rdtSend(const char* buffer, int len, const sockaddr_in& to) {
     int retries = 0;
     const int maxRetries = 30;
-    const int timeoutDuration = 1000; // timeout in milliseconds
 
     while (retries < maxRetries) {
         // send packet
         OrzTCPPacket* packet = reinterpret_cast<OrzTCPPacket*>(new char[sizeof(OrzTCPHeader) + len]);
-        OrzTCPHeaderEncode(&packet->header, TYPE_DATA, 0, 0, len, rdtAck);
+        OrzTCPHeaderEncode(&packet->header, TYPE_DATA, 0, 0, len, rdtSeqAck);
         memcpy(packet->payload, buffer, len);
         OrzTCPSetHeaderChecksum(&packet->header);
         if (udpSendPacket(packet, to) == false) {
@@ -190,15 +189,6 @@ bool RDTClient::rdtSend(const char* buffer, int len, const sockaddr_in& to) {
         bool acked = false;
         // wait for ACK
         while (!acked) {
-            // check if timeout
-            auto endTime = std::chrono::high_resolution_clock::now();
-            auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
-            // if (duration > timeoutDuration) {
-            //     // timeout reched
-            //     // std::cout << "[INFO ] Timeout" << std::endl;
-            //     break;
-            // }
-
             // receive packet
             OrzTCPPacket *recvPacket = NULL;
             sockaddr_in from;
@@ -216,7 +206,7 @@ bool RDTClient::rdtSend(const char* buffer, int len, const sockaddr_in& to) {
             }
 
             // check if ACK and not corrupted
-            if (recvPacket->header.type == TYPE_ACK && recvPacket->header.rdtAck == rdtAck && checkSum(&recvPacket->header)) {
+            if (recvPacket->header.type == TYPE_ACK && recvPacket->header.rdtSeqAck == rdtSeqAck && checkSum(&recvPacket->header)) {
                 acked = true;
                 delete[] reinterpret_cast<char*>(recvPacket);
                 break;
@@ -230,9 +220,9 @@ bool RDTClient::rdtSend(const char* buffer, int len, const sockaddr_in& to) {
             // stop timer
             auto endTime = std::chrono::high_resolution_clock::now();
             auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
-            // std::cout << "[INFO ] ACK" << rdtAck << " received" << std::endl;
+            // std::cout << "[INFO ] ACK" << rdtSeqAck << " received" << std::endl;
             // toggle ACK
-            rdtAck = 1 - rdtAck;
+            rdtSeqAck = 1 - rdtSeqAck;
             return true;
         }
 
@@ -255,7 +245,9 @@ bool RDTClient::tcpConnect(const sockaddr_in& to) {
     updateSeq();
     int retries = 0;
     const int maxRetries = 30;
-    const int timeoutDuration = 1000; // timeout in milliseconds
+
+    // start timer
+    auto startTime = std::chrono::high_resolution_clock::now();
 
     while (retries < maxRetries) {
         // send SYN
@@ -267,23 +259,10 @@ bool RDTClient::tcpConnect(const sockaddr_in& to) {
             return false;
         }
 
-        // start timer
-        auto startTime = std::chrono::high_resolution_clock::now();
-
         bool acked = false;
         int ack = 0;
         // wait for SYNACK
         while (!acked) {
-            // check if timeout
-            // auto endTime = std::chrono::high_resolution_clock::now();
-            // auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(endTime - startTime).count();
-            // std::cout << duration << std::endl;
-            // if (duration > timeoutDuration) {
-            //     // timeout reched
-            //     std::cout << "[INFO ] Timeout, retrying " << retries + 1 << "/" << maxRetries << std::endl;
-            //     break;
-            // }
-
             // receive packet
             OrzTCPPacket *recvPacket = NULL;
             sockaddr_in from;

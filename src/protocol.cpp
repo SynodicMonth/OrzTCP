@@ -55,11 +55,14 @@ void OrzTCPHeaderEncode(OrzTCPHeader *header, uint8_t type, uint32_t seq, uint32
     header->len = len;
     header->rdtAck = rdtAck;
     header->checksum = 0;
+}
 
-    // checksum
+// calc checksum
+void OrzTCPSetHeaderChecksum(OrzTCPHeader *header) {
     uint16_t *ptr = (uint16_t *)header;
     uint32_t sum = 0;
-    for (int i = 0; i < sizeof(OrzTCPHeader) / 2; i++) {
+    int len = sizeof(OrzTCPHeader) + header->len;
+    for (int i = 0; i < len / 2; i++) {
         sum += ptr[i];
     }
     while (sum >> 16) {
@@ -72,7 +75,8 @@ void OrzTCPHeaderEncode(OrzTCPHeader *header, uint8_t type, uint32_t seq, uint32
 bool checkSum(OrzTCPHeader *header) {
     uint16_t *ptr = (uint16_t *)header;
     uint32_t sum = 0;
-    for (int i = 0; i < sizeof(OrzTCPHeader) / 2; i++) {
+    int len = sizeof(OrzTCPHeader) + header->len;
+    for (int i = 0; i < len / 2; i++) {
         sum += ptr[i];
     }
     while (sum >> 16) {

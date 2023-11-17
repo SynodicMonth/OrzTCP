@@ -176,6 +176,7 @@ bool RDTClient::rdtSend(const char* buffer, int len, const sockaddr_in& to) {
         OrzTCPPacket* packet = reinterpret_cast<OrzTCPPacket*>(new char[sizeof(OrzTCPHeader) + len]);
         OrzTCPHeaderEncode(&packet->header, TYPE_DATA, 0, 0, len, rdtAck);
         memcpy(packet->payload, buffer, len);
+        OrzTCPSetHeaderChecksum(&packet->header);
         if (udpSendPacket(packet, to) == false) {
             handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
             delete[] reinterpret_cast<char*>(packet);
@@ -260,6 +261,7 @@ bool RDTClient::tcpConnect(const sockaddr_in& to) {
         // send SYN
         OrzTCPPacket packet;
         OrzTCPHeaderEncode(&packet.header, TYPE_SYN, seq, 0, 0, 0);
+        OrzTCPSetHeaderChecksum(&packet.header);
         if (udpSendPacket(&packet, to) == false) {
             handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
             return false;
@@ -317,6 +319,7 @@ bool RDTClient::tcpConnect(const sockaddr_in& to) {
             std::cout << "[INFO ] SYNACK received in " << duration << "ms" << std::endl;
             // send ACK
             OrzTCPHeaderEncode(&packet.header, TYPE_ACK, seq + 1, ack, 0, 0);
+            OrzTCPSetHeaderChecksum(&packet.header);
             if (udpSendPacket(&packet, to) == false) {
                 handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
                 return false;
@@ -344,6 +347,7 @@ bool RDTClient::tcpTerminate(const sockaddr_in& to) {
         // send FIN
         OrzTCPPacket packet;
         OrzTCPHeaderEncode(&packet.header, TYPE_FIN, seq, 0, 0, 0);
+        OrzTCPSetHeaderChecksum(&packet.header);
         if (udpSendPacket(&packet, to) == false) {
             handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
             return false;
@@ -399,6 +403,7 @@ bool RDTClient::tcpTerminate(const sockaddr_in& to) {
             std::cout << "[INFO ] FINACK received in " << duration << "ms" << std::endl;
             // send ACK
             OrzTCPHeaderEncode(&packet.header, TYPE_ACK, seq + 1, ack, 0, 0);
+            OrzTCPSetHeaderChecksum(&packet.header);
             if (udpSendPacket(&packet, to) == false) {
                 handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
                 return false;

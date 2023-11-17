@@ -189,6 +189,7 @@ bool RDTServer::rdtRecv(char* buf, int& len, const sockaddr_in& from) {
             // send ack
             OrzTCPPacket ackPacket;
             OrzTCPHeaderEncode(&ackPacket.header, TYPE_ACK, 0, 0, 0, rdtSeq);
+            OrzTCPSetHeaderChecksum(&ackPacket.header);
             if (udpSendPacket(&ackPacket, from) == false) {
                 delete[] reinterpret_cast<char*>(packet);
                 handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
@@ -215,6 +216,7 @@ bool RDTServer::rdtRecv(char* buf, int& len, const sockaddr_in& from) {
             // invalid packet, send ack for previous packet
             OrzTCPPacket ackPacket;
             OrzTCPHeaderEncode(&ackPacket.header, TYPE_ACK, 0, 0, 0, 1 - rdtSeq);
+            OrzTCPSetHeaderChecksum(&ackPacket.header);
             if (udpSendPacket(&ackPacket, from) == false) {
                 delete[] reinterpret_cast<char*>(packet);
                 handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
@@ -257,6 +259,7 @@ bool RDTServer::tcpAccept(const sockaddr_in& from) {
     // Send SYN-ACK
     OrzTCPPacket synAckPacket;
     OrzTCPHeaderEncode(&synAckPacket.header, TYPE_SYN | TYPE_ACK, ack, ack, 0, 0);
+    OrzTCPSetHeaderChecksum(&synAckPacket.header);
     if (udpSendPacket(&synAckPacket, from) == false) {
         handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
         return false;
@@ -304,6 +307,7 @@ bool RDTServer::tcpTerminate(const sockaddr_in& from, int initAck) {
     // Send FIN + ACK
     OrzTCPPacket finAckPacket;
     OrzTCPHeaderEncode(&finAckPacket.header, TYPE_FIN | TYPE_ACK, ack, ack, 0, 0);
+    OrzTCPSetHeaderChecksum(&finAckPacket.header);
     if (udpSendPacket(&finAckPacket, from) == false) {
         handleError("[ERROR] udpSendPacket() failed", WSAGetLastError());
         return false;

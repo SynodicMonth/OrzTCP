@@ -79,7 +79,7 @@ Payload: 报文体，变长，用于传输文件数据。
 
 ### 断开连接：三次挥手
 
-断开连接使用仿照 TCP 实现简化版的三次挥手（合并了 TCP 三次挥手的第二、三次挥手）。
+断开连接使用仿照 TCP 实现简化版的三次挥手（合并了 TCP 四次挥手的第二、三次挥手）。
 *本次实验 Seq 和 Ack 没有完全按照 TCP 的定义，仅用于简单的断开连接，后续实验传输时用到 Seq 和 Ack 后会进行完善。*
  1. 发送端发送 FIN 报文给接收端，Seq 为随机数，Ack 为 0，报文体为空。
  2. 接收端收到 FIN 报文后，发送 FIN+ACK 报文给发送端，Seq 为发送端的 Seq + 1, Ack 为发送端的 Seq + 1，报文体为空。
@@ -114,6 +114,40 @@ sequenceDiagram
 ```
 
 ## 具体实现（因篇幅原因，只列出了重点部分）
+
+### 辅助函数（protocol.cpp）
+
+实现了 TCP 校验和算法。
+```cpp
+// calc checksum
+void OrzTCPSetHeaderChecksum(OrzTCPHeader *header) {
+    uint16_t *ptr = (uint16_t *)header;
+    uint32_t sum = 0;
+    int len = sizeof(OrzTCPHeader) + header->len;
+    for (int i = 0; i < len / 2; i++) {
+        sum += ptr[i];
+    }
+    while (sum >> 16) {
+        sum = (sum & 0xffff) + (sum >> 16);
+    }
+    header->checksum = ~sum;
+}
+```
+```cpp
+// test checksum
+bool checkSum(OrzTCPHeader *header) {
+    uint16_t *ptr = (uint16_t *)header;
+    uint32_t sum = 0;
+    int len = sizeof(OrzTCPHeader) + header->len;
+    for (int i = 0; i < len / 2; i++) {
+        sum += ptr[i];
+    }
+    while (sum >> 16) {
+        sum = (sum & 0xffff) + (sum >> 16);
+    }
+    return sum == 0xffff;
+}
+```
 
 ### 发送端（client.cpp）
 
@@ -224,7 +258,7 @@ bool RDTClient::tcpConnect(const sockaddr_in& to) {
 }
 ```
 
-#### T断开连接
+#### 断开连接
 
 与建立连接类似，不再赘述。
 
@@ -316,6 +350,29 @@ bool RDTClient::rdtSendFile(FILE* file, const char* targetIP, int targetPort) {
 }
 ```
 ### 接收端（server.cpp）
+
+```cpp
+class RDTServer {
+public:
+    RDTServer(const char* ip, int port); // 初始化
+    ~RDTServer(); // 析构函数
+    void recvFile(const char* filename); // 接收文件
+private:
+    SOCKET serverSocket; // UDP Socket
+    struct sockaddr_in serverAddr; // 本地地址
+    WSADATA wsa; 
+    sockaddr_in clientAddr; // 客户端地址
+    int rdtSeqAck = 0; // RDT 3.0 Seq/Ack
+    bool rdtRecv(char* buf, int &len, const sockaddr_in& from); // RDT 3.0 接收数据 
+    bool udpSendPacket(const OrzTCPPacket* packet, const sockaddr_in& to); // UDP 发送数据
+    bool udpRecvPacket(OrzTCPPacket*& packet, const sockaddr_in& from); // UDP 接收数据
+    bool tcpAccept(const sockaddr_in& from); // TCP 建立连接
+    bool tcpTerminate(const sockaddr_in& from, int initAck); // TCP 断开连接
+    void cleanUp(); // 清理资源
+    void updateSeq(); // 更新序列号（随机数）
+    void handleError(const char* errorMsg, int errorCode); // 错误处理
+};
+```
 
 #### 初始化
 与客户端类似，不再赘述。
@@ -462,8 +519,37 @@ void RDTServer::recvFile(const char* filename) {
 ```
 
 ## 测试
-传输
+以下测试在 Windows 下运行，均使用了路由器转发，参数设置为丢包率 3%，延迟 5ms。
+
+### helloword.txt
+![img0](image-1.png)
+
+### 1.jpg
+![img1](image-2.png)
+
+### 2.jpg
+![img2](image-3.png)
+
+### 3.jpg
+![img3](image-4.png)
+
+### 测试结果
+
+| 文件名 | 文件大小 | 传输时间 | 传输速率 |
+| --- | --- | --- | --- |
+| helloworld.txt | 1655808 字节 | 45.82 秒 | 35 KB/s |
+| 1.jpg | 1857353 字节 | 105.5 秒 | 16 KB/s |
+| 2.jpg | 5898505 字节 | 352.48 秒 | 15 KB/s |
+| 3.jpg | 11968994 字节 | 841.2 秒 | 13 KB/s |
+
+## 遇到的问题
+
+刚开始由于 recvFrom 函数默认是阻塞模式，导致发送端和接收端都卡死在 recvFrom 函数中，无法实现超时重传，后来通过设定超时时间解决了这个问题。
+
+TCP 的握手挥手与 RDT 3.0 不能完全兼容，因此实现了两套机制，之后在后续实验会进行完善。
 
 ## 注
 * 本项目使用了 WinAPI，使用 CMake 构建，需要 MSVC 编译器。
-* 没有提供设置服务器 IP 和端口的功能，默认服务器 IP 为 INADDR_ANY，即 0.0.0.0，端口为 12345，可以在 `server.cpp` 中修改。
+* 没有提供输入发送端和接收端的 IP 和端口的方法，如有需要请修改代码。默认发送端（client）IP 为 127.0.0.1 端口为 8889，连接目标 IP 为 127.0.0.1 端口为 8887。接收端 IP 为 127.0.0.1 端口为 8888。需要使用路由器转发，参数设置为：路由器 IP 127.0.0.1，端口 8887，服务器 IP 127.0.0.1，端口 8888。
+* 请先开服务端，再打开客户端。
+* 请将要传输的文件放在可执行文件的同一目录下。

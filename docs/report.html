@@ -1,0 +1,579 @@
+<!DOCTYPE html><html><head>
+      <title>report</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+      
+      
+      <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.0/dist/mermaid.min.js"></script>
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="计算机网络实验报告">计算机网络实验报告 </h1>
+<h2 id="实验3基于udp服务设计可靠传输协议并编程实现3-1">实验3：基于UDP服务设计可靠传输协议并编程实现（3-1） </h2>
+<blockquote>
+<p>物联网安全 2112052 郭大玮</p>
+</blockquote>
+<h2 id="协议设计">协议设计 </h2>
+<p>鉴于三次实验的兼容性考虑，因此直接设计了包含三次实验所需字段的协议，具体如下：</p>
+<h3 id="报文头">报文头： </h3>
+<pre data-role="codeBlock" data-info="" class="language-text text"><code>// OrzTCP Header
+//  0                   1                   2                   3  
+//  0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// |    Type (8)   |RDT Seq/Ack (8)|         Reserved (16)         |
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// |                     Sequence Number (32)                      |
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// |                  Acknowledgment Number (32)                   |
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// |            Length (16)        |           Checksum (16)       |
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+// |                            Payload ...                        |
+// +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre><p>Type: 报文类型，8 位，采用类似 TCP 的标志位方式，均为 1 置位，具体定义如下：</p>
+<pre data-role="codeBlock" data-info="" class="language-text text"><code>  0   1   2   3   4   5   6   7
++---+---+---+---+---+---+---+---+
+|SYN|ACK|FIN|     Reserved      |
++---+---+---+---+---+---+---+---+
+SYN: 同步位，用于三次握手。
+ACK: 确认位，用于三次握手和四次挥手。
+FIN: 结束位，用于四次挥手。
+全部位置 0 表示数据报文 (DATA)。
+</code></pre><p>RDT Seq/Ack: 8 位，用于 RDT 3.0 协议的序列号和确认号，仅用于本次实验（停等协议），该字段只有 0 和 1 两个值，用于区分两个序列号。下次实验会删掉该字段。</p>
+<p>Reserved: 2 字节，保留字段，暂时未使用。</p>
+<p>Sequence Number: 32 位，序列号，本次实验仅用于 TCP 三次握手和四次挥手，下次实验会用于数据报文的序列号。</p>
+<p>Acknowledgment Number: 32 位，确认号，本次实验仅用于 TCP 三次握手和四次挥手，下次实验会用于数据报文的确认号。</p>
+<p>Length: 16 位，报文长字节数，<strong>不包括报文头。</strong></p>
+<p>Checksum: 16 位，校验和，用于校验报文头和报文体的完整性，校验算法与 TCP 相同。</p>
+<p>Payload: 报文体，变长，用于传输文件数据。</p>
+<h3 id="建立连接三次握手">建立连接：三次握手 </h3>
+<p>建立连接使用仿照 TCP 实现简化版的三次握手。<br>
+<em>本次实验 Seq 和 Ack 没有完全按照 TCP 的定义，仅用于简单的建立连接，后续实验传输时用到 Seq 和 Ack 后会进行完善。</em></p>
+<ol>
+<li>发送端发送 SYN 报文给接收端，Seq 为随机数，Ack 为 0，报文体为空。</li>
+<li>接收端收到 SYN 报文后，发送 SYN+ACK 报文给发送端，Seq 为发送端的 Seq, Ack 为发送端的 Seq + 1，报文体为空。</li>
+<li>发送端收到 SYN+ACK 报文后，发送 ACK 报文给接收端，Seq 为接收端的 Ack，Ack 为接收端的 Seq + 1，报文体为空。</li>
+</ol>
+<p>之后发送端和接收端都进入 ESTABLISHED 状态，开始传输数据。</p>
+<h3 id="数据传输">数据传输 </h3>
+<p>接收确认和超时重传机制通过 rdt 3.0 实现，流量控制采用停等协议。<br>
+建立连接后，发送端直接以数据报文的形式发送数据，由于是停等协议，此处暂时只需要 0/1 两个序列号和确认号，因此暂时不使用报文头中的 Sequence Number 和 Acknowledgment Number 字段，使用 RDT Seq/Ack 字段设置为 0/1 来区分两个序列号。<br>
+接收端收到数据报文后，若数据包序列号符合预期并且未损坏，则发送 ACK 报文给发送端，RDT Seq/Ack 字段设置为 0/1，表示确认收到了序列号为 0/1 的数据报文，否则丢弃该数据报文，等待超时重传。接收端接收到后将数据写入文件。</p>
+<p>具体实现细节见后文实现部分</p>
+<h3 id="差错检验">差错检验 </h3>
+<p>差错检验算法采用了 TCP 中的校验和算法。</p>
+<p>生成校验和时，将报文头和报文体看作一个连续的字节流，将每 16 位相加，最后取反得到校验和。<br>
+校验时，将报文头和报文体看作一个连续的字节流，将每 16 位相加，如果结果为 0xFFFF 则校验通过，否则校验失败。</p>
+<h3 id="断开连接三次挥手">断开连接：三次挥手 </h3>
+<p>断开连接使用仿照 TCP 实现简化版的三次挥手（合并了 TCP 四次挥手的第二、三次挥手）。<br>
+<em>本次实验 Seq 和 Ack 没有完全按照 TCP 的定义，仅用于简单的断开连接，后续实验传输时用到 Seq 和 Ack 后会进行完善。</em></p>
+<ol>
+<li>发送端发送 FIN 报文给接收端，Seq 为随机数，Ack 为 0，报文体为空。</li>
+<li>接收端收到 FIN 报文后，发送 FIN+ACK 报文给发送端，Seq 为发送端的 Seq + 1, Ack 为发送端的 Seq + 1，报文体为空。</li>
+<li>发送端收到 FIN+ACK 报文后，发送 ACK 报文给接收端，Seq 为接收端的 Ack，Ack 为接收端的 Seq + 1，报文体为空。</li>
+</ol>
+<p>之后发送端和接收端都进入 CLOSED 状态，断开连接，释放资源，正常退出。</p>
+<h3 id="时序图">时序图： </h3>
+<div class="mermaid">sequenceDiagram
+    participant Sender
+    participant Receiver
+
+    Sender-&gt;&gt;Receiver: SYN (Sequence = X)
+    Receiver-&gt;&gt;Sender: SYN+ACK (Seq = X, Ack = X+1)
+    Sender-&gt;&gt;Receiver: ACK (Seq = X+1, Ack = X+1)
+
+    Note over Sender,Receiver: Connection Established
+
+    loop Data Packet Transmission
+        Sender-&gt;&gt;Receiver: DATA (RDT Seq/Ack = 0)
+        Receiver-&gt;&gt;Sender: ACK (RDT Seq/Ack = 0)
+        Sender-&gt;&gt;Receiver: DATA (RDT Seq/Ack = 1)
+        Receiver-&gt;&gt;Sender: ACK (RDT Seq/Ack = 1)
+    end
+
+    Sender-&gt;&gt;Receiver: FIN (Seq = Y)
+    Receiver-&gt;&gt;Sender: FIN+ACK (Seq = Y+1, Ack = Y+1)
+    Sender-&gt;&gt;Receiver: ACK (Seq = Y+1, Ack = Y+1)
+    Note over Sender,Receiver: Connection Terminated
+
+</div><h2 id="具体实现因篇幅原因只列出了重点部分">具体实现（因篇幅原因，只列出了重点部分） </h2>
+<h3 id="辅助函数protocolcpp">辅助函数（protocol.cpp） </h3>
+<p>实现了 TCP 校验和算法。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token comment">// calc checksum</span>
+<span class="token keyword keyword-void">void</span> <span class="token function">OrzTCPSetHeaderChecksum</span><span class="token punctuation">(</span>OrzTCPHeader <span class="token operator">*</span>header<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-uint16_t">uint16_t</span> <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword keyword-uint16_t">uint16_t</span> <span class="token operator">*</span><span class="token punctuation">)</span>header<span class="token punctuation">;</span>
+    <span class="token keyword keyword-uint32_t">uint32_t</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> len <span class="token operator">=</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>OrzTCPHeader<span class="token punctuation">)</span> <span class="token operator">+</span> header<span class="token operator">-&gt;</span>len<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">+=</span> ptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>sum <span class="token operator">&gt;&gt;</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">=</span> <span class="token punctuation">(</span>sum <span class="token operator">&amp;</span> <span class="token number">0xffff</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>sum <span class="token operator">&gt;&gt;</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    header<span class="token operator">-&gt;</span>checksum <span class="token operator">=</span> <span class="token operator">~</span>sum<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token comment">// test checksum</span>
+<span class="token keyword keyword-bool">bool</span> <span class="token function">checkSum</span><span class="token punctuation">(</span>OrzTCPHeader <span class="token operator">*</span>header<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-uint16_t">uint16_t</span> <span class="token operator">*</span>ptr <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token keyword keyword-uint16_t">uint16_t</span> <span class="token operator">*</span><span class="token punctuation">)</span>header<span class="token punctuation">;</span>
+    <span class="token keyword keyword-uint32_t">uint32_t</span> sum <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> len <span class="token operator">=</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>OrzTCPHeader<span class="token punctuation">)</span> <span class="token operator">+</span> header<span class="token operator">-&gt;</span>len<span class="token punctuation">;</span>
+    <span class="token keyword keyword-for">for</span> <span class="token punctuation">(</span><span class="token keyword keyword-int">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> len <span class="token operator">/</span> <span class="token number">2</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">+=</span> ptr<span class="token punctuation">[</span>i<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>sum <span class="token operator">&gt;&gt;</span> <span class="token number">16</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        sum <span class="token operator">=</span> <span class="token punctuation">(</span>sum <span class="token operator">&amp;</span> <span class="token number">0xffff</span><span class="token punctuation">)</span> <span class="token operator">+</span> <span class="token punctuation">(</span>sum <span class="token operator">&gt;&gt;</span> <span class="token number">16</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> sum <span class="token operator">==</span> <span class="token number">0xffff</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="发送端clientcpp">发送端（client.cpp） </h3>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-class">class</span> <span class="token class-name">RDTClient</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token function">RDTClient</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> ip<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 初始化</span>
+    <span class="token operator">~</span><span class="token function">RDTClient</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 析构函数</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">rdtSendFile</span><span class="token punctuation">(</span>FILE<span class="token operator">*</span> file<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> targetIP<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> targetPort<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 发送文件到指定 IP 和端口</span>
+<span class="token keyword keyword-private">private</span><span class="token operator">:</span>
+    SOCKET clientSocket<span class="token punctuation">;</span> <span class="token comment">// UDP Socket</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">sockaddr_in</span> clientAddr<span class="token punctuation">;</span> <span class="token comment">// 本地地址</span>
+    WSADATA wsa<span class="token punctuation">;</span> 
+    <span class="token keyword keyword-int">int</span> rdtSeqAck <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// RDT 3.0 Seq/Ack</span>
+    <span class="token keyword keyword-int">int</span> seq <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// TCP 序列号</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">rdtSend</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> buffer<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> len<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// RDT 3.0 发送数据</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">udpSendPacket</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> OrzTCPPacket<span class="token operator">*</span> packet<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// UDP 发送数据</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">udpRecvPacket</span><span class="token punctuation">(</span>OrzTCPPacket<span class="token operator">*</span><span class="token operator">&amp;</span> packet<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> from<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// UDP 接收数据</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">tcpConnect</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TCP 建立连接</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">tcpTerminate</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TCP 断开连接</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">cleanUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 清理资源</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">updateSeq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 更新序列号（随机数）</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">handleError</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> errorMsg<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> errorCode<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 错误处理</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><h4 id="初始化">初始化 </h4>
+<p>创建 Socket，使用 UDP 协议</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>clientSocket <span class="token operator">=</span> <span class="token function">socket</span><span class="token punctuation">(</span>AF_INET<span class="token punctuation">,</span> SOCK_DGRAM<span class="token punctuation">,</span> IPPROTO_UDP<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> SOCKET_ERROR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">handleError</span><span class="token punctuation">(</span><span class="token string">"[ERROR] socket() failed"</span><span class="token punctuation">,</span> <span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>设置超时（用于 RDT 超时重传）</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token comment">// prepare the sockaddr_in structure</span>
+clientAddr<span class="token punctuation">.</span>sin_family <span class="token operator">=</span> AF_INET<span class="token punctuation">;</span>
+clientAddr<span class="token punctuation">.</span>sin_addr<span class="token punctuation">.</span>S_un<span class="token punctuation">.</span>S_addr <span class="token operator">=</span> <span class="token function">inet_addr</span><span class="token punctuation">(</span>ip<span class="token punctuation">)</span><span class="token punctuation">;</span>
+clientAddr<span class="token punctuation">.</span>sin_port <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span>port<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token comment">// set timeout </span>
+<span class="token keyword keyword-int">int</span> timeout <span class="token operator">=</span> TIMEOUT_MSEC<span class="token punctuation">;</span>
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">setsockopt</span><span class="token punctuation">(</span>clientSocket<span class="token punctuation">,</span> SOL_SOCKET<span class="token punctuation">,</span> SO_RCVTIMEO<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>timeout<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>timeout<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">handleError</span><span class="token punctuation">(</span><span class="token string">"[ERROR] setsockopt() failed"</span><span class="token punctuation">,</span> <span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token comment">// bind</span>
+<span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">bind</span><span class="token punctuation">(</span>clientSocket<span class="token punctuation">,</span> <span class="token punctuation">(</span><span class="token keyword keyword-struct">struct</span> <span class="token class-name">sockaddr</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>clientAddr<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>clientAddr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">==</span> SOCKET_ERROR<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">handleError</span><span class="token punctuation">(</span><span class="token string">"[ERROR] bind() failed"</span><span class="token punctuation">,</span> <span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><p>其他与实验一大致一致。</p>
+<h4 id="建立连接">建立连接 </h4>
+<p>融合了 RDT 3.0 和 TCP 三次握手的建立连接过程，使用阻塞模式，设置 socket 超时时间，超时会重传 SYN 报文，最多重试 30 次，如果 30 次都没有收到 SYN+ACK 报文，则认为连接失败（为了防止卡死）。如果收到 SYN+ACK 报文，则发送 ACK 报文，连接建立成功。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-bool">bool</span> <span class="token class-name">RDTClient</span><span class="token double-colon punctuation">::</span><span class="token function">tcpConnect</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> to<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// simplified TCP 3 way handshake</span>
+    <span class="token function">updateSeq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>retries <span class="token operator">&lt;</span> maxRetries<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// send SYN</span>
+        OrzTCPPacket packet<span class="token punctuation">;</span>
+        <span class="token function">OrzTCPHeaderEncode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">.</span>header<span class="token punctuation">,</span> TYPE_SYN<span class="token punctuation">,</span> seq<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpSendPacket</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">,</span> to<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// ... 省略错误处理</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-bool">bool</span> acked <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-int">int</span> ack <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+        <span class="token comment">// wait for SYNACK</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>acked<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// receive packet</span>
+            OrzTCPPacket <span class="token operator">*</span>recvPacket <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            sockaddr_in from<span class="token punctuation">;</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpRecvPacket</span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> WSAETIMEDOUT<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 超时，重传SYN</span>
+                    <span class="token comment">// timeout </span>
+                    <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[INFO ] Timeout, retrying"</span> <span class="token operator">&lt;&lt;</span> retries <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"/"</span> <span class="token operator">&lt;&lt;</span> maxRetries <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+                    <span class="token keyword keyword-break">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// ... 省略错误处理</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// check if SYNACK and not corrupted</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>type <span class="token operator">==</span> <span class="token punctuation">(</span>TYPE_SYN <span class="token operator">|</span> TYPE_ACK<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> <span class="token function">checkSum</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>ack <span class="token operator">==</span> seq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                acked <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                ack <span class="token operator">=</span> recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>seq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+                <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword keyword-break">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// otherwise, ignore the packet</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// check if SYNACK is received</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>acked<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// send ACK</span>
+            <span class="token function">OrzTCPHeaderEncode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">.</span>header<span class="token punctuation">,</span> TYPE_ACK<span class="token punctuation">,</span> seq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">,</span> ack<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpSendPacket</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token punctuation">,</span> to<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// ... 省略错误处理</span>
+            <span class="token punctuation">}</span>
+            <span class="token keyword keyword-return">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// timeout reached, resend packet</span>
+        retries<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// max retries reached</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[ERROR] Max retries reached"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="断开连接">断开连接 </h4>
+<p>与建立连接类似，不再赘述。</p>
+<h4 id="rdt-30-发送数据">RDT 3.0 发送数据 </h4>
+<p>将指定 buffer 中的数据发送给指定接收端，使用阻塞模式，通过设置 socket 超时时间作为计时器实现超时重传，同样最多重试 30 次。实现停等机制，直到收到对应的 ACK 报文，并且验证校验和无误，才认为发送成功，继续发送下一个数据报文。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-bool">bool</span> <span class="token class-name">RDTClient</span><span class="token double-colon punctuation">::</span><span class="token function">rdtSend</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> buffer<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> len<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> to<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> retries <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-int">int</span> maxRetries <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
+
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span>retries <span class="token operator">&lt;</span> maxRetries<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 最多重试 30 次</span>
+        <span class="token comment">// 发送数据报文</span>
+        OrzTCPPacket<span class="token operator">*</span> packet <span class="token operator">=</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>OrzTCPPacket<span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span><span class="token keyword keyword-new">new</span> <span class="token keyword keyword-char">char</span><span class="token punctuation">[</span><span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>OrzTCPHeader<span class="token punctuation">)</span> <span class="token operator">+</span> len<span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">OrzTCPHeaderEncode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token operator">-&gt;</span>header<span class="token punctuation">,</span> TYPE_DATA<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> len<span class="token punctuation">,</span> rdtSeqAck<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token function">memcpy</span><span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>payload<span class="token punctuation">,</span> buffer<span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpSendPacket</span><span class="token punctuation">(</span>packet<span class="token punctuation">,</span> to<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token function">handleError</span><span class="token punctuation">(</span><span class="token string">"[ERROR] udpSendPacket() failed"</span><span class="token punctuation">,</span> <span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-return">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+        <span class="token keyword keyword-bool">bool</span> acked <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+        <span class="token comment">// wait for ACK</span>
+        <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>acked<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 停等机制</span>
+            <span class="token comment">// receive packet</span>
+            OrzTCPPacket <span class="token operator">*</span>recvPacket <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+            sockaddr_in from<span class="token punctuation">;</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpRecvPacket</span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> WSAETIMEDOUT<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// 超时，重传数据报文</span>
+                    <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[INFO ] Timeout, retrying "</span> <span class="token operator">&lt;&lt;</span> retries <span class="token operator">+</span> <span class="token number">1</span> <span class="token operator">&lt;&lt;</span> <span class="token string">"/"</span> <span class="token operator">&lt;&lt;</span> maxRetries <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+                    <span class="token keyword keyword-break">break</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// ... 省略错误处理</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 收到对应 ACK 报文，且校验和无误</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>type <span class="token operator">==</span> TYPE_ACK <span class="token operator">&amp;&amp;</span> recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>rdtSeqAck <span class="token operator">==</span> rdtSeqAck <span class="token operator">&amp;&amp;</span> <span class="token function">checkSum</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                acked <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+                <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token keyword keyword-break">break</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 丢弃其他报文</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 直到收到对应 ACK 报文，才认为发送成功</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>acked<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// RDT Seq/Ack 翻转（0/1）</span>
+            rdtSeqAck <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> rdtSeqAck<span class="token punctuation">;</span>
+            <span class="token keyword keyword-return">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token comment">// 超时重传</span>
+        retries<span class="token operator">++</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// max retries reached</span>
+    std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[ERROR] Max retries reached"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token keyword keyword-return">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="发送文件">发送文件 </h4>
+<p>发送文件时，先建立连接，然后将文件内容分块发送，每次发送一个数据报文（1400字节），直到文件发送完毕，最后断开连接，释放资源，正常退出。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-bool">bool</span> <span class="token class-name">RDTClient</span><span class="token double-colon punctuation">::</span><span class="token function">rdtSendFile</span><span class="token punctuation">(</span>FILE<span class="token operator">*</span> file<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> targetIP<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> targetPort<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    sockaddr_in to<span class="token punctuation">;</span>
+    <span class="token function">memset</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token keyword keyword-char">char</span> <span class="token operator">*</span><span class="token punctuation">)</span><span class="token operator">&amp;</span>to<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>to<span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    to<span class="token punctuation">.</span>sin_family <span class="token operator">=</span> AF_INET<span class="token punctuation">;</span>
+    to<span class="token punctuation">.</span>sin_port <span class="token operator">=</span> <span class="token function">htons</span><span class="token punctuation">(</span>targetPort<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    to<span class="token punctuation">.</span>sin_addr<span class="token punctuation">.</span>S_un<span class="token punctuation">.</span>S_addr <span class="token operator">=</span> <span class="token function">inet_addr</span><span class="token punctuation">(</span>targetIP<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token function">tcpConnect</span><span class="token punctuation">(</span>to<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 建立连接</span>
+        <span class="token comment">// ... 省略错误处理</span>
+    <span class="token punctuation">}</span> 
+    <span class="token keyword keyword-char">char</span> buffer<span class="token punctuation">[</span>BUFSIZE<span class="token punctuation">]</span><span class="token punctuation">;</span> <span class="token comment">// 1400 bytes</span>
+    <span class="token keyword keyword-int">int</span> readLen <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> totalReadLen <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>readLen <span class="token operator">=</span> <span class="token function">fread</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">,</span> BUFSIZE <span class="token operator">-</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>OrzTCPHeader<span class="token punctuation">)</span><span class="token punctuation">,</span> file<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">rdtSend</span><span class="token punctuation">(</span>buffer<span class="token punctuation">,</span> readLen<span class="token punctuation">,</span> to<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 发送数据</span>
+            <span class="token comment">// ... 此处省略错误处理</span>
+        <span class="token punctuation">}</span>
+        totalReadLen <span class="token operator">+=</span> readLen<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">tcpTerminate</span><span class="token punctuation">(</span>to<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 断开连接</span>
+        <span class="token comment">// ... 此处省略错误处理</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h3 id="接收端servercpp">接收端（server.cpp） </h3>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-class">class</span> <span class="token class-name">RDTServer</span> <span class="token punctuation">{</span>
+<span class="token keyword keyword-public">public</span><span class="token operator">:</span>
+    <span class="token function">RDTServer</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> ip<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> port<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 初始化</span>
+    <span class="token operator">~</span><span class="token function">RDTServer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 析构函数</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">recvFile</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> filename<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 接收文件</span>
+<span class="token keyword keyword-private">private</span><span class="token operator">:</span>
+    SOCKET serverSocket<span class="token punctuation">;</span> <span class="token comment">// UDP Socket</span>
+    <span class="token keyword keyword-struct">struct</span> <span class="token class-name">sockaddr_in</span> serverAddr<span class="token punctuation">;</span> <span class="token comment">// 本地地址</span>
+    WSADATA wsa<span class="token punctuation">;</span> 
+    sockaddr_in clientAddr<span class="token punctuation">;</span> <span class="token comment">// 客户端地址</span>
+    <span class="token keyword keyword-int">int</span> rdtSeqAck <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> <span class="token comment">// RDT 3.0 Seq/Ack</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">rdtRecv</span><span class="token punctuation">(</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span> buf<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> <span class="token operator">&amp;</span>len<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> from<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// RDT 3.0 接收数据 </span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">udpSendPacket</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> OrzTCPPacket<span class="token operator">*</span> packet<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> to<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// UDP 发送数据</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">udpRecvPacket</span><span class="token punctuation">(</span>OrzTCPPacket<span class="token operator">*</span><span class="token operator">&amp;</span> packet<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> from<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// UDP 接收数据</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">tcpAccept</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> from<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TCP 建立连接</span>
+    <span class="token keyword keyword-bool">bool</span> <span class="token function">tcpTerminate</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> from<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> initAck<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// TCP 断开连接</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">cleanUp</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 清理资源</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">updateSeq</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 更新序列号（随机数）</span>
+    <span class="token keyword keyword-void">void</span> <span class="token function">handleError</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> errorMsg<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span> errorCode<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 错误处理</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+</code></pre><h4 id="初始化-1">初始化 </h4>
+<p>与客户端类似，不再赘述。</p>
+<h4 id="建立连接-1">建立连接 </h4>
+<p>循环监听 SYN 报文，直到收到 SYN 报文，发送 SYN+ACK 报文进行响应，然后等待 ACK 报文，连接建立成功。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-bool">bool</span> <span class="token class-name">RDTServer</span><span class="token double-colon punctuation">::</span><span class="token function">tcpAccept</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> from<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// simplified TCP 3 way handshake</span>
+    <span class="token keyword keyword-const">const</span> <span class="token keyword keyword-int">int</span> timeoutDuration <span class="token operator">=</span> <span class="token number">1000</span><span class="token punctuation">;</span>
+    OrzTCPPacket <span class="token operator">*</span>recvPacket <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> ack <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-bool">bool</span> synReceived <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>synReceived<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 循环监听 SYN 报文</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpRecvPacket</span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> WSAETIMEDOUT<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// 超时，继续监听</span>
+                <span class="token keyword keyword-continue">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                <span class="token comment">// ... 省略错误处理</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>type <span class="token operator">==</span> TYPE_SYN <span class="token operator">&amp;&amp;</span> <span class="token function">checkSum</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 收到 SYN 报文</span>
+            ack <span class="token operator">=</span> recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>seq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+            synReceived <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+            std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[INFO ] Received SYN"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 发送 SYN+ACK 报文</span>
+    OrzTCPPacket synAckPacket<span class="token punctuation">;</span>
+    <span class="token function">OrzTCPHeaderEncode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>synAckPacket<span class="token punctuation">.</span>header<span class="token punctuation">,</span> TYPE_SYN <span class="token operator">|</span> TYPE_ACK<span class="token punctuation">,</span> ack<span class="token punctuation">,</span> ack<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpSendPacket</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>synAckPacket<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token comment">// ... 省略错误处理</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 等待 ACK 报文</span>
+    <span class="token keyword keyword-auto">auto</span> startTime <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>high_resolution_clock<span class="token double-colon punctuation">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-bool">bool</span> ackReceived <span class="token operator">=</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token operator">!</span>ackReceived<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token keyword keyword-auto">auto</span> endTime <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>high_resolution_clock<span class="token double-colon punctuation">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-auto">auto</span> duration <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">duration_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>milliseconds<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>endTime <span class="token operator">-</span> startTime<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>duration <span class="token operator">&gt;</span> timeoutDuration<span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 超时时，默认已经建立连接，尝试接收数据</span>
+            std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[INFO ] Timeout waiting for ACK"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+            <span class="token comment">// assume half open connection</span>
+            <span class="token keyword keyword-return">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpRecvPacket</span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> WSAETIMEDOUT<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// 超时</span>
+                <span class="token keyword keyword-continue">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                <span class="token comment">// ... 省略错误处理</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>type <span class="token operator">==</span> TYPE_ACK <span class="token operator">&amp;&amp;</span> <span class="token function">checkSum</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> recvPacket<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>ack <span class="token operator">==</span> ack <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            ackReceived <span class="token operator">=</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>recvPacket<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-return">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="断开连接-1">断开连接 </h4>
+<p>与建立连接类似，不再赘述。</p>
+<h4 id="rdt-30-接收数据">RDT 3.0 接收数据 </h4>
+<p>循环监听数据报文，直到收到数据报文，发送 ACK 报文进行响应，然后将数据写入文件，继续监听下一个数据报文。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-bool">bool</span> <span class="token class-name">RDTServer</span><span class="token double-colon punctuation">::</span><span class="token function">rdtRecv</span><span class="token punctuation">(</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span> buf<span class="token punctuation">,</span> <span class="token keyword keyword-int">int</span><span class="token operator">&amp;</span> len<span class="token punctuation">,</span> <span class="token keyword keyword-const">const</span> sockaddr_in<span class="token operator">&amp;</span> from<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-int">int</span> fromLen <span class="token operator">=</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span>from<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token boolean">true</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 持续监听数据报文</span>
+        OrzTCPPacket<span class="token operator">*</span> packet <span class="token operator">=</span> <span class="token constant">NULL</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpRecvPacket</span><span class="token punctuation">(</span>packet<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">WSAGetLastError</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">==</span> WSAETIMEDOUT<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// 超时，继续监听</span>
+                <span class="token keyword keyword-continue">continue</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+                <span class="token comment">// ... 省略错误处理</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>rdtSeqAck <span class="token operator">==</span> rdtSeq <span class="token operator">&amp;&amp;</span> <span class="token function">checkSum</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token operator">-&gt;</span>header<span class="token punctuation">)</span> <span class="token operator">&amp;&amp;</span> packet<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>type <span class="token operator">!=</span> TYPE_FIN<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 收到对应序列号的数据报文，且校验和无误</span>
+            len <span class="token operator">=</span> packet<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>len<span class="token punctuation">;</span>
+            <span class="token function">memcpy</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>payload<span class="token punctuation">,</span> len<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 写入缓冲区</span>
+            <span class="token comment">// 发送 ACK 报文</span>
+            OrzTCPPacket ackPacket<span class="token punctuation">;</span>
+            <span class="token function">OrzTCPHeaderEncode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ackPacket<span class="token punctuation">.</span>header<span class="token punctuation">,</span> TYPE_ACK<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> rdtSeq<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpSendPacket</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ackPacket<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// ... 省略错误处理</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// RDT Seq/Ack 翻转（0/1）</span>
+            rdtSeq <span class="token operator">=</span> <span class="token number">1</span> <span class="token operator">-</span> rdtSeq<span class="token punctuation">;</span>
+            <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-return">return</span> <span class="token boolean">true</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span>
+            <span class="token comment">// 检测到 FIN 报文，准备断开连接</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>packet<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>type <span class="token operator">==</span> TYPE_FIN <span class="token operator">&amp;&amp;</span> <span class="token function">checkSum</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>packet<span class="token operator">-&gt;</span>header<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">tcpTerminate</span><span class="token punctuation">(</span>from<span class="token punctuation">,</span> packet<span class="token operator">-&gt;</span>header<span class="token punctuation">.</span>seq <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                    <span class="token comment">// ... 省略错误处理</span>
+                <span class="token punctuation">}</span> <span class="token keyword keyword-else">else</span> <span class="token punctuation">{</span> 
+                    <span class="token comment">// 断开连接成功</span>
+                    <span class="token keyword keyword-delete">delete</span><span class="token punctuation">[</span><span class="token punctuation">]</span> <span class="token generic-function"><span class="token function">reinterpret_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span><span class="token keyword keyword-char">char</span><span class="token operator">*</span><span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>packet<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                    <span class="token keyword keyword-return">return</span> <span class="token boolean">false</span><span class="token punctuation">;</span>
+                <span class="token punctuation">}</span>
+            <span class="token punctuation">}</span>
+            <span class="token comment">// 丢弃其他报文，重传上一个 ACK 报文</span>
+            OrzTCPPacket ackPacket<span class="token punctuation">;</span>
+            <span class="token function">OrzTCPHeaderEncode</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ackPacket<span class="token punctuation">.</span>header<span class="token punctuation">,</span> TYPE_ACK<span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">0</span><span class="token punctuation">,</span> <span class="token number">1</span> <span class="token operator">-</span> rdtSeq<span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span><span class="token function">udpSendPacket</span><span class="token punctuation">(</span><span class="token operator">&amp;</span>ackPacket<span class="token punctuation">,</span> from<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+                <span class="token comment">// ... 省略错误处理</span>
+            <span class="token punctuation">}</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre><h4 id="接收文件">接收文件 </h4>
+<p>接收文件时，先建立连接，然后循环监听数据报文，直到收到 FIN 报文，断开连接，释放资源，正常退出。</p>
+<pre data-role="codeBlock" data-info="cpp" class="language-cpp cpp"><code><span class="token keyword keyword-void">void</span> <span class="token class-name">RDTServer</span><span class="token double-colon punctuation">::</span><span class="token function">recvFile</span><span class="token punctuation">(</span><span class="token keyword keyword-const">const</span> <span class="token keyword keyword-char">char</span><span class="token operator">*</span> filename<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token function">tcpAccept</span><span class="token punctuation">(</span>clientAddr<span class="token punctuation">)</span> <span class="token operator">==</span> <span class="token boolean">false</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 等待建立连接</span>
+        std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[INFO ] Attempting to accept connection..."</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    <span class="token comment">// 接收文件</span>
+    FILE<span class="token operator">*</span> fp <span class="token operator">=</span> <span class="token function">fopen</span><span class="token punctuation">(</span>filename<span class="token punctuation">,</span> <span class="token string">"wb"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> startTime <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>high_resolution_clock<span class="token double-colon punctuation">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 计时器</span>
+    <span class="token keyword keyword-char">char</span> buf<span class="token punctuation">[</span>BUFSIZE<span class="token punctuation">]</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> len <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-int">int</span> totalLen <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-while">while</span> <span class="token punctuation">(</span><span class="token function">rdtRecv</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> len<span class="token punctuation">,</span> clientAddr<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 循环监听数据报文</span>
+        <span class="token function">fwrite</span><span class="token punctuation">(</span>buf<span class="token punctuation">,</span> <span class="token keyword keyword-sizeof">sizeof</span><span class="token punctuation">(</span><span class="token keyword keyword-char">char</span><span class="token punctuation">)</span><span class="token punctuation">,</span> len<span class="token punctuation">,</span> fp<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 写入文件</span>
+        totalLen <span class="token operator">+=</span> len<span class="token punctuation">;</span>
+        <span class="token keyword keyword-if">if</span> <span class="token punctuation">(</span>totalLen <span class="token operator">%</span> <span class="token number">100</span> <span class="token operator">==</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token punctuation">{</span> <span class="token comment">// 每 100 个数据报文输出一次信息</span>
+            std<span class="token double-colon punctuation">::</span>cout <span class="token operator">&lt;&lt;</span> <span class="token string">"[INFO ] Received "</span> <span class="token operator">&lt;&lt;</span> totalLen <span class="token operator">&lt;&lt;</span> <span class="token string">" bytes"</span> <span class="token operator">&lt;&lt;</span> std<span class="token double-colon punctuation">::</span>endl<span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+    <span class="token keyword keyword-auto">auto</span> endTime <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>high_resolution_clock<span class="token double-colon punctuation">::</span><span class="token function">now</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-auto">auto</span> duration <span class="token operator">=</span> std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span><span class="token generic-function"><span class="token function">duration_cast</span><span class="token generic class-name"><span class="token operator">&lt;</span>std<span class="token double-colon punctuation">::</span>chrono<span class="token double-colon punctuation">::</span>milliseconds<span class="token operator">&gt;</span></span></span><span class="token punctuation">(</span>endTime <span class="token operator">-</span> startTime<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">fclose</span><span class="token punctuation">(</span>fp<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token comment">// ... 省略输出文件传输信息的代码</span>
+<span class="token punctuation">}</span>
+</code></pre><h2 id="测试">测试 </h2>
+<p>以下测试在 Windows 下运行，均使用了路由器转发，参数设置为丢包率 3%，延迟 5ms。</p>
+<h3 id="hellowordtxt">helloword.txt </h3>
+<p><img src="image-1.png" alt="img0"></p>
+<h3 id="1jpg">1.jpg </h3>
+<p><img src="image-2.png" alt="img1"></p>
+<h3 id="2jpg">2.jpg </h3>
+<p><img src="image-3.png" alt="img2"></p>
+<h3 id="3jpg">3.jpg </h3>
+<p><img src="image-4.png" alt="img3"></p>
+<h3 id="测试结果">测试结果 </h3>
+<table>
+<thead>
+<tr>
+<th>文件名</th>
+<th>文件大小</th>
+<th>传输时间</th>
+<th>传输速率</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>helloworld.txt</td>
+<td>1655808 字节</td>
+<td>45.82 秒</td>
+<td>35 KB/s</td>
+</tr>
+<tr>
+<td>1.jpg</td>
+<td>1857353 字节</td>
+<td>105.5 秒</td>
+<td>16 KB/s</td>
+</tr>
+<tr>
+<td>2.jpg</td>
+<td>5898505 字节</td>
+<td>352.48 秒</td>
+<td>15 KB/s</td>
+</tr>
+<tr>
+<td>3.jpg</td>
+<td>11968994 字节</td>
+<td>841.2 秒</td>
+<td>13 KB/s</td>
+</tr>
+</tbody>
+</table>
+<h2 id="遇到的问题">遇到的问题 </h2>
+<p>刚开始由于 recvFrom 函数默认是阻塞模式，导致发送端和接收端都卡死在 recvFrom 函数中，无法实现超时重传，后来通过设定超时时间解决了这个问题。</p>
+<p>TCP 的握手挥手与 RDT 3.0 不能完全兼容，因此实现了两套机制，之后在后续实验会进行完善。</p>
+<h2 id="注">注 </h2>
+<ul>
+<li>本项目使用了 WinAPI，使用 CMake 构建，需要 MSVC 编译器。</li>
+<li>没有提供输入发送端和接收端的 IP 和端口的方法，如有需要请修改代码。默认发送端（client）IP 为 127.0.0.1 端口为 8889，连接目标 IP 为 127.0.0.1 端口为 8887。接收端 IP 为 127.0.0.1 端口为 8888。需要使用路由器转发，参数设置为：路由器 IP 127.0.0.1，端口 8887，服务器 IP 127.0.0.1，端口 8888。</li>
+<li>请先开服务端，再打开客户端。</li>
+<li>请将要传输的文件放在可执行文件的同一目录下。</li>
+</ul>
+
+      </div>
+      
+      
+    
+    
+    <script type="module">
+// TODO: If ZenUML gets integrated into mermaid in the future,
+//      we can remove the following lines.
+
+
+var MERMAID_CONFIG = ({"startOnLoad":false});
+if (typeof MERMAID_CONFIG !== 'undefined') {
+  MERMAID_CONFIG.startOnLoad = false
+  MERMAID_CONFIG.cloneCssStyles = false
+  MERMAID_CONFIG.theme = "default"
+}
+
+mermaid.initialize(MERMAID_CONFIG || {})
+if (typeof(window['Reveal']) !== 'undefined') {
+  function mermaidRevealHelper(event) {
+    var currentSlide = event.currentSlide
+    var diagrams = currentSlide.querySelectorAll('.mermaid')
+    for (var i = 0; i < diagrams.length; i++) {
+      var diagram = diagrams[i]
+      if (!diagram.hasAttribute('data-processed')) {
+        mermaid.init(null, diagram, ()=> {
+          Reveal.slide(event.indexh, event.indexv)
+        })
+      }
+    }
+  }
+  Reveal.addEventListener('slidetransitionend', mermaidRevealHelper)
+  Reveal.addEventListener('ready', mermaidRevealHelper)
+  await mermaid.run({
+    nodes: document.querySelectorAll('.mermaid')
+  })
+} else {
+  await mermaid.run({
+    nodes: document.querySelectorAll('.mermaid')
+  })
+}
+</script>
+    
+    
+    
+  
+    </body></html>

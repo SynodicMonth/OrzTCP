@@ -9,7 +9,9 @@ void OrzTCPHeaderEncode(OrzTCPHeader *header, uint8_t type, uint32_t seq, uint32
     header->checksum = 0;
 
     // assume no payload
-    OrzTCPSetHeaderChecksum(header);
+    if (len == 0) {
+        OrzTCPSetHeaderChecksum(header);
+    }
 }
 
 // calc checksum
